@@ -30,7 +30,7 @@ spec:
 apiVersion: v1
 kind: Service 
 metadata:
-  name: k8spod
+  name: k8spod2
   namespace: demo
 spec:
   type: ClusterIP
