@@ -28,7 +28,7 @@ spec:
 apiVersion: v1
 kind: Service 
 metadata:
-  name: apphost-svc
+  name: k8spod
   namespace: demo
 spec:
   type: ClusterIP
@@ -38,19 +38,19 @@ spec:
     - protocol: TCP
       port: 80
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress 
-metadata:
-  name: app-ingress
-  namespace: demo
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /test
-        pathType: Prefix
-        backend:
-          service:
-            name: apphost-svc
-            port:
-              number: 80
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress 
+#metadata:
+#  name: app-ingress
+#  namespace: demo
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#      - path: /test
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: apphost-svc
+#            port:
+#              number: 80
