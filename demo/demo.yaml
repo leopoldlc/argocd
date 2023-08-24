@@ -35,7 +35,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    role: k8spod
+    app: k8spod
   ports:
     - protocol: TCP
       port: 80
