@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo
+---
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: k8spod
+  Namespace: demo
+  labels:
+    app: k8spod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: k8spod
+  template:
+    metadata:
+      labels:
+        app: k8spod 
+    spec: 
+      containers:
+        - name: k8spod
+          imagePullPolicy: Always
+          image: leopoldlc/demo:latest
+---
+apiVersion: v1
+kind: Service 
+metadata:
+  name: apphost-svc
+  Namespace: demo
+spec:
+  type: ClusterIP
+  selector:
+    role: webserver
+  ports:
+    - protocol: TCP
+      port: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress 
+metadata:
+  name: app-ingress
+  namespace: demo
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /test
+        pathType: Prefix
+        backend:
+          service:
+            name: apphost-svc
+            port:
+              number: 80
